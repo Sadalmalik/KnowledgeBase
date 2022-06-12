@@ -1,0 +1,17 @@
+# Base terms  of knoladge base
+term
+relation
+object
+subject
+isa
+akindof
+isa isa relation
+akindof isa relation
+
+
+!rule
+    $A isa $B
+    $B isa $C
+!conclusion
+    $A isa $C
+!rule-end

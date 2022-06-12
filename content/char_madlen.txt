@@ -1,0 +1,6 @@
+!include char__base
+
+me isa Madlen
+me name-is Madlen
+Madlen isa human
+

@@ -1,0 +1,5 @@
+!include _base
+
+human isa subject
+name-is isa relation
+human isa mortal
