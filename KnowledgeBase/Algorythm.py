@@ -1,28 +1,60 @@
-from knowledge.Combinator import combinator
+# Knowledge thinking
+
+from .Combinator import combinator
+from .Container import Container, Rule
 
 
-def apply_rules(facts: list, rules):
-    new_facts = []
-    for rule in rules:
-        apply_rule(facts, rule, new_facts)
-    facts.extend(new_facts)
+def apply_rules(container: Container):
+    add_facts = set()
+    rem_facts = set()
+    for rule in container.rules:
+        add, rem = apply_rule(container, rule)
+        add_facts = add_facts.union(add)
+        rem_facts = rem_facts.union(rem)
+    add_count = len(container.facts)
+    for fact in add_facts:
+        container.add(fact)
+    rem_count = len(container.facts)
+    for fact in rem_facts:
+        container.rem(fact)
+    last_count = len(container.facts)
+    # Amount of changes
+    return (rem_count - add_count) + (rem_count - last_count)
 
 
-def apply_rule(facts: list, rule, new_facts: list):
-    """Применяет правила к списку фактов и добавляет все вновь созданные факты в отдельный список"""
-    patterns = rule['patterns']
-    size = len(patterns)
+def apply_rule(container: Container, rule: Rule):
+    # Getting facts slice
+    facts = set()
+    add_facts = set()
+    rem_facts = set()
+    for term in rule.terms:
+        facts = facts.union(container.terms[term])
 
+    # Memoization of matches
+    size = len(rule.patterns)
+    matches_memo = [None] * size
+    for i in range(size):
+        matches_memo[i] = list(match_iterator(facts, rule.patterns[i]))
+
+    # Iterate patterns combinations
     def iterator(idx):
-        return match_iterator(facts, patterns[idx])
+        m = matches_memo[idx]
+        for value in m:
+            yield value
 
+    # Iterate all matches combinations
     for matches in combinator(size, iterator):
         values = try_collapse_dicts(matches)
+        if not values:
+            continue
 
-        if values:
-            for prop in rule['conclusions']:
-                mew_fact = bind_values(prop, values)
-                new_facts.append(mew_fact)
+        # If combination is valid - add conclusions and exclusions
+        for inc in rule.conclusions:
+            add_facts.add(bind_values(inc, values))
+        for exc in rule.exclusions:
+            rem_facts.add(bind_values(exc, values))
+
+    return add_facts, rem_facts
 
 
 def try_collapse_dicts(dicts):
@@ -50,7 +82,7 @@ def bind_values(pattern, values):
     for i in range(l):
         p = pattern[i]
         result[i] = values[p] if p[0] == '$' else p
-    return result
+    return tuple(result)
 
 
 def match_iterator(facts, pattern):

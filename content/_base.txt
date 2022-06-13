@@ -5,9 +5,6 @@ object
 subject
 isa
 akindof
-isa isa relation
-akindof isa relation
-
 
 !rule
     $A isa $B

@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6f151d3-be2d-4099-a2aa-31dfa45723e0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/content/_base.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/char__base.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/char_arthur.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/char_jhon.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/content/char_madlen.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/knowledge/Algorythm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/knowledge/Combinator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/knowledge/Database.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KnowledgeBase/Container.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KnowledgeBase/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/_base.txt" beforeDir="false" afterPath="$PROJECT_DIR$/content/_base.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/char__base.txt" beforeDir="false" afterPath="$PROJECT_DIR$/content/char__base.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge/Algorythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/KnowledgeBase/Algorythm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge/Combinator.py" beforeDir="false" afterPath="$PROJECT_DIR$/KnowledgeBase/Combinator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge/Database.py" beforeDir="false" afterPath="$PROJECT_DIR$/KnowledgeBase/Loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,5 +116,16 @@
       <updated>1654643815415</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/KnowledgeBase/Algorythm.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
