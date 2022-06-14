@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e6f151d3-be2d-4099-a2aa-31dfa45723e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KnowledgeBase/Algorythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/KnowledgeBase/Algorythm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KnowledgeBase/Container.py" beforeDir="false" afterPath="$PROJECT_DIR$/KnowledgeBase/Container.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/_base.txt" beforeDir="false" afterPath="$PROJECT_DIR$/content/_base.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
