@@ -4,21 +4,34 @@ from .Combinator import combinator
 from .Container import Container, Rule
 
 
+def complete_apply(container: Container, limit=100):
+    while True:
+        limit -= 1
+        changes = apply_rules(container)
+        if changes == 0:
+            break
+        if limit == 0:
+            break
+
+
 def apply_rules(container: Container):
     add_facts = set()
     rem_facts = set()
+    # Apply all  rules
     for rule in container.rules:
         add, rem = apply_rule(container, rule)
         add_facts = add_facts.union(add)
         rem_facts = rem_facts.union(rem)
+    # Add new facts
     add_count = len(container.facts)
     for fact in add_facts:
         container.add(fact)
+    # Remove old facts
     rem_count = len(container.facts)
     for fact in rem_facts:
         container.rem(fact)
     last_count = len(container.facts)
-    # Amount of changes
+    # Return amount of changes
     return (rem_count - add_count) + (rem_count - last_count)
 
 
@@ -30,7 +43,7 @@ def apply_rule(container: Container, rule: Rule):
     for term in rule.terms:
         facts = facts.union(container.terms[term])
 
-    # Memoization of matches
+    # Memoization of matches for performance
     size = len(rule.patterns)
     matches_memo = [None] * size
     for i in range(size):

@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e6f151d3-be2d-4099-a2aa-31dfa45723e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KnowledgeBase/Algorythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/KnowledgeBase/Algorythm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/char__base.txt" beforeDir="false" afterPath="$PROJECT_DIR$/content/char__base.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +117,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/KnowledgeBase/Algorythm.py</url>
-          <line>34</line>
+          <line>47</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
