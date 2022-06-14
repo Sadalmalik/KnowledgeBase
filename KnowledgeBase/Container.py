@@ -29,7 +29,7 @@ class Rule:
             for token in pattern:
                 if not token.startswith('$'):
                     self._terms.append(token)
-# End of Rule
+    # End of Rule
 
 
 class Container:
