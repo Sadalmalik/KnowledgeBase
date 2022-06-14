@@ -117,6 +117,8 @@ def match(fact, pattern):
         if f == p:
             continue
         if p[0] == '$':
+            if p in values and values[p] != f:
+                return None
             values[p] = f
             continue
         if f != p:
