@@ -5,7 +5,7 @@ from .Container import Container, Rule
 
 
 def file_reader(filename):
-    with open(filename) as file:
+    with open(filename, encoding="utf8") as file:
         for index, line in enumerate(file):
             line = line.strip()
             if len(line) == 0:
