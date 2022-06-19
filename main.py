@@ -1,5 +1,5 @@
 # AAA yourself!
-from KnowledgeBase.Algorythm import complete_apply
+from KnowledgeBase.Algorythm import evaluate_rules
 from KnowledgeBase.Loader import load
 
 
@@ -7,7 +7,7 @@ def main():
     database = load("content/char_arthur.txt")
 
     print(f"Before:\n{str(database)}\n")
-    complete_apply(database)
+    evaluate_rules(database)
     print(f"After:\n{str(database)}\n")
 
 

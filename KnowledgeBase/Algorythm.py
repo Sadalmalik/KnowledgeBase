@@ -4,7 +4,7 @@ from .Combinator import combinator
 from .Container import Container, Rule
 
 
-def complete_apply(container: Container, limit=100):
+def evaluate_rules(container: Container, limit=100):
     while True:
         limit -= 1
         changes = apply_rules(container)
