@@ -1,7 +1,7 @@
 # Knowledge thinking
 
-from .Combinator import combinator
-from .Container import Container, Rule
+from .combinator import combinator
+from .container import Container, Rule
 
 
 def evaluate_rules(container: Container, limit=100):
@@ -40,8 +40,8 @@ def apply_rule(container: Container, rule: Rule):
     facts = set()
     add_facts = set()
     rem_facts = set()
-    for term in rule.terms:
-        facts = facts.union(container.terms[term])
+    for symbol in rule.symbols:
+        facts = facts.union(container.symbols[symbol])
 
     # Memoization of matches for performance
     size = len(rule.patterns)
@@ -58,7 +58,7 @@ def apply_rule(container: Container, rule: Rule):
     # Iterate all matches combinations
     for matches in combinator(size, iterator):
         values = try_collapse_dicts(matches)
-        if not values:
+        if values is None:
             continue
 
         # If combination is valid - add conclusions and exclusions
@@ -71,7 +71,7 @@ def apply_rule(container: Container, rule: Rule):
 
 
 def try_collapse_dicts(dicts):
-    """Объединяет все словари в один при условии что у одинаковых ключей в разных словарях одинаковые значения"""
+    """Объединяет все словари в один при условии, что у одинаковых ключей в разных словарях одинаковые значения"""
     keys = set()
     for d in dicts:
         keys |= d.keys()
@@ -108,19 +108,58 @@ def match_iterator(facts, pattern):
     yield None
 
 
-def match(fact, pattern):
-    """Находит совпадение факта с паттерном"""
-    if len(fact) != len(pattern):
+def match(fact: list, pattern: list):
+    """Находит совпадение факта с паттерном
+    Точка - для игнорирования одного слова
+    Звёздочка - для игнорирования любого числа слов
+
+    Пример:
+    паттерн . B C будет успешно обрабатывать любые последовательности, кончающиеся на B C:
+        A B C
+        X B C
+    Но не будет обрабатывать
+        X Y Z B C
+
+    A * B
+    * A B
+    A B *
+
+    """
+    if len(fact) != len(pattern) and '*' not in pattern:
         return None
-    values = dict()
+    variables = dict()
+
+    if '*' in pattern:
+        # обработка паттернов с игнорированием более одного символа
+        star_idx = pattern.index('*')
+        first = pattern[:star_idx]
+        last = pattern[star_idx + 1:]
+
+        if first:
+            fact_slice = fact[:len(first)]
+            match_first = match(fact_slice, first)
+            if match_first is None:
+                return None
+            variables.update(match_first)
+
+        if last:
+            fact_slice = fact[-(len(last)):]
+            match_last = match(fact_slice, last)
+            if match_last is None:
+                return None
+            variables.update(match_last)
+
+        return variables
+
     for f, p in zip(fact, pattern):
-        if f == p:
+        if p == '.' or f == p:
             continue
         if p[0] == '$':
-            if p in values and values[p] != f:
+            if p in variables and variables[p] != f:
                 return None
-            values[p] = f
+            variables[p] = f
             continue
         if f != p:
             return None
-    return values
+
+    return variables

@@ -1,10 +1,9 @@
-# AAA yourself!
-from KnowledgeBase.Algorythm import evaluate_rules
-from KnowledgeBase.Loader import load
+from KnowledgeBase.algorythm import evaluate_rules
+from KnowledgeBase.loader import load
 
 
 def main():
-    database = load("content/char_arthur.txt")
+    database = load("content/test.txt")
 
     print(f"Before:\n{str(database)}\n")
     evaluate_rules(database)

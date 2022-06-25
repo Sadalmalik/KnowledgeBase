@@ -1,0 +1,22 @@
+A X X X X
+X X X X B
+C X X X D
+
+
+!rule
+    A *
+!conclusion
+    Found 1 A
+!rule-end
+
+!rule
+    * B
+!conclusion
+    Found 2 B
+!rule-end
+
+!rule
+    C * D
+!conclusion
+    Found 3 C
+!rule-end
