@@ -40,8 +40,8 @@ def apply_rule(container: Container, rule: Rule):
     facts = set()
     add_facts = set()
     rem_facts = set()
-    for term in rule.symbols:
-        facts = facts.union(container.terms[term])
+    for symbol in rule.symbols:
+        facts = facts.union(container.symbols[symbol])
 
     # Memoization of matches for performance
     size = len(rule.patterns)
@@ -58,7 +58,7 @@ def apply_rule(container: Container, rule: Rule):
     # Iterate all matches combinations
     for matches in combinator(size, iterator):
         values = try_collapse_dicts(matches)
-        if not values:
+        if values is None:
             continue
 
         # If combination is valid - add conclusions and exclusions
@@ -71,7 +71,7 @@ def apply_rule(container: Container, rule: Rule):
 
 
 def try_collapse_dicts(dicts):
-    """Объединяет все словари в один при условии что у одинаковых ключей в разных словарях одинаковые значения"""
+    """Объединяет все словари в один при условии, что у одинаковых ключей в разных словарях одинаковые значения"""
     keys = set()
     for d in dicts:
         keys |= d.keys()

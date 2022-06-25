@@ -27,7 +27,7 @@ class Rule:
         self._symbols.clear()
         for pattern in self._patterns:
             for token in pattern:
-                if not token.startswith('$'):
+                if not token.startswith('$') and token != '*' and token != '.':
                     self._symbols.append(token)
     # End of Rule
 
@@ -35,7 +35,7 @@ class Rule:
 class Container:
     def __init__(self, name, facts: list = None, rules: list = None):
         self._name = name
-        self._terms = dict()
+        self._symbols = dict()
         self._facts = set()
         self._rules = []
         if facts:
@@ -56,11 +56,11 @@ class Container:
         return self._rules
 
     @property
-    def terms(self):
-        return self._terms
+    def symbols(self):
+        return self._symbols
 
     def get_term(self, term):
-        return self._terms[term]
+        return self._symbols[term]
 
     def add_all(self, facts):
         for fact in facts:
@@ -78,18 +78,18 @@ class Container:
             fact = tuple(fact)
         self._facts.add(fact)
         for term in fact:
-            if term not in self._terms:
-                self._terms[term] = set()
-            self._terms[term].add(fact)
+            if term not in self._symbols:
+                self._symbols[term] = set()
+            self._symbols[term].add(fact)
 
     def rem(self, fact):
         if not isinstance(fact, tuple):
             fact = tuple(fact)
         self._facts.remove(fact)
         for term in fact:
-            if term not in self._terms:
+            if term not in self._symbols:
                 continue
-            self._terms[term].remove(fact)
+            self._symbols[term].remove(fact)
 
     def __str__(self):
         lines = [f'Knowledge \'{self._name}\': {len(self._facts)} facts']

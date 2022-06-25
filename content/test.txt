@@ -4,19 +4,19 @@ C X X X D
 
 
 !rule
-    $VAR *
+    A *
 !conclusion
-    Found 1 $VAR
+    Found 1 A
 !rule-end
 
 !rule
-    * $VAR
+    * B
 !conclusion
-    Found 2 $VAR
+    Found 2 B
 !rule-end
 
 !rule
-    $VAR * $VAR
+    C * D
 !conclusion
-    Found 3 $VAR
+    Found 3 C
 !rule-end
