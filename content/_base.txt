@@ -22,9 +22,10 @@ akindof
 #   Кроме того оно может содержать в себе факты (как и обычные правила)
 #   например:
 #
-#   !do-something                       # Выполнит некоторое внешнее действие
-#   !cond pattern with $variable        # Выполнит поиск и если найдёт совпадение, то блок будет исполняться
-#       variable value is $variable     # добавит
+#   !do-something                           # Выполнит некоторое внешнее действие
+#   !cond pattern with $variable            # Выполнит поиск и если найдёт совпадение, то блок будет исполняться
+#       !exclude variable value is empty    # Уберет старый факт
+#       variable value is $variable         # добавит новый факт
 #   !cond-end
 #
 #   !each pattern with $variable        # аналогично cond выполнит поиск совпадений, но блок выполниться для КАЖДОГО совпадения
