@@ -109,12 +109,27 @@ def match_iterator(facts, pattern):
 
 
 def match(fact, pattern):
-    """Находит совпадение факта с паттерном"""
+    """Находит совпадение факта с паттерном
+    Точка - для игнорирования одного слова
+    Звёздочка - для игнорирования любого числа слов
+
+    Пример:
+    паттерн . B C будет успешно обрабатывать любые последовательности, кончающиеся на B C:
+        A B C
+        X B C
+    Но не будет обрабатывать
+        X Y Z B C
+
+
+    """
     if len(fact) != len(pattern):
         return None
     values = dict()
     for f, p in zip(fact, pattern):
-        if f == p:
+        if p == '*':
+            # обработка паттернов с игнорированием более одного символа
+            pass
+        if p == '.' or f == p:
             continue
         if p[0] == '$':
             if p in values and values[p] != f:
