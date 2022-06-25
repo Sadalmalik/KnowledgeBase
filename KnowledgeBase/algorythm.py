@@ -40,7 +40,7 @@ def apply_rule(container: Container, rule: Rule):
     facts = set()
     add_facts = set()
     rem_facts = set()
-    for term in rule.terms:
+    for term in rule.symbols:
         facts = facts.union(container.terms[term])
 
     # Memoization of matches for performance
@@ -108,7 +108,7 @@ def match_iterator(facts, pattern):
     yield None
 
 
-def match(fact, pattern):
+def match(fact: list, pattern: list):
     """Находит совпадение факта с паттерном
     Точка - для игнорирования одного слова
     Звёздочка - для игнорирования любого числа слов
@@ -120,22 +120,46 @@ def match(fact, pattern):
     Но не будет обрабатывать
         X Y Z B C
 
+    A * B
+    * A B
+    A B *
 
     """
-    if len(fact) != len(pattern):
+    if len(fact) != len(pattern) and '*' not in pattern:
         return None
-    values = dict()
+    variables = dict()
+
+    if '*' in pattern:
+        # обработка паттернов с игнорированием более одного символа
+        star_idx = pattern.index('*')
+        first = pattern[:star_idx]
+        last = pattern[star_idx + 1:]
+
+        if first:
+            fact_slice = fact[:len(first)]
+            match_first = match(fact_slice, first)
+            if match_first is None:
+                return None
+            variables.update(match_first)
+
+        if last:
+            fact_slice = fact[-(len(last)):]
+            match_last = match(fact_slice, last)
+            if match_last is None:
+                return None
+            variables.update(match_last)
+
+        return variables
+
     for f, p in zip(fact, pattern):
-        if p == '*':
-            # обработка паттернов с игнорированием более одного символа
-            pass
         if p == '.' or f == p:
             continue
         if p[0] == '$':
-            if p in values and values[p] != f:
+            if p in variables and variables[p] != f:
                 return None
-            values[p] = f
+            variables[p] = f
             continue
         if f != p:
             return None
-    return values
+
+    return variables

@@ -1,0 +1,22 @@
+A X X X X
+X X X X B
+C X X X D
+
+
+!rule
+    $VAR *
+!conclusion
+    Found 1 $VAR
+!rule-end
+
+!rule
+    * $VAR
+!conclusion
+    Found 2 $VAR
+!rule-end
+
+!rule
+    $VAR * $VAR
+!conclusion
+    Found 3 $VAR
+!rule-end

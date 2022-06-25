@@ -5,7 +5,7 @@ class Rule:
         self._patterns = []
         self._conclusions = []
         self._exclusions = []
-        self._terms = []
+        self._symbols = []
 
     @property
     def patterns(self):
@@ -20,15 +20,15 @@ class Rule:
         return self._exclusions
 
     @property
-    def terms(self):
-        return self._terms
+    def symbols(self):
+        return self._symbols
 
-    def update_terms(self):
-        self._terms.clear()
+    def update_symbols(self):
+        self._symbols.clear()
         for pattern in self._patterns:
             for token in pattern:
                 if not token.startswith('$'):
-                    self._terms.append(token)
+                    self._symbols.append(token)
     # End of Rule
 
 

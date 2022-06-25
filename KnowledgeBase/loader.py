@@ -60,7 +60,7 @@ def load(filename):
             if token == '!exclusion':
                 exclusions, token = read_until(reader, ['!rule-end'])
                 rule.exclusions.extend(exclusions)
-            rule.update_terms()
+            rule.update_symbols()
             container.add_rule(rule)
             continue
 
