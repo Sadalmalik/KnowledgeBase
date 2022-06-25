@@ -1,6 +1,5 @@
-# AAA yourself!
-from KnowledgeBase.Algorythm import evaluate_rules
-from KnowledgeBase.Loader import load
+from KnowledgeBase.algorythm import evaluate_rules
+from KnowledgeBase.loader import load
 
 
 def main():

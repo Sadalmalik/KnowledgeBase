@@ -1,7 +1,7 @@
 # Knowledge thinking
 
-from .Combinator import combinator
-from .Container import Container, Rule
+from .combinator import combinator
+from .container import Container, Rule
 
 
 def evaluate_rules(container: Container, limit=100):

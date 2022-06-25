@@ -1,7 +1,7 @@
 # Knowledge loader
 import os
 
-from .Container import Container, Rule
+from .container import Container, Rule
 
 
 def file_reader(filename):
